@@ -19,5 +19,49 @@ Este repositorio contiene un servidor de **Model Context Protocol (MCP)** diseñ
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone 
+   git clone https://github.com/tu-usuario/mcp-opencti.git
    cd mcp-opencti
+   ```
+
+2. **Instalar dependencias:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Configurar entorno:**
+   - Copia el archivo de ejemplo:
+     ```bash
+     cp .env.example .env
+     ```
+   - Edita `.env` y agrega tu URL de OpenCTI y tu Token.
+
+
+## 🖥️ Uso con Claude Desktop
+
+Edita tu archivo de configuración de Claude (`%APPDATA%\Claude\claude_desktop_config.json`) y agrega:
+
+   ```json
+   {
+     "mcpServers": {
+       "opencti": {
+         "command": "python",
+         "args": [
+           "C:\\ruta\\absoluta\\a\\tu\\proyecto\\start_claude.py"
+         ]
+       }
+     }
+   }
+   ```
+
+## ⚡ Uso con n8n (Web / SSE)
+
+Para integrar con n8n, necesitas levantar el servidor en modo HTTP:
+
+1. **Iniciar el servidor:**
+   ```bash
+   python start_n8n.py
+   ```
+
+2. **En n8n:**
+   - Usa un nodo **MCP** (si está disponible) o configura una conexión SSE.
+   - Conecta a la URL: `http://localhost:8000/sse`

@@ -2,7 +2,7 @@ from fastmcp import FastMCP
 from opencti_client import OpenCTIClient
 from dotenv import load_dotenv
 import os
-from typing import Optional
+from typing import Optional, List, Dict, Any, Union
 import sys
 
 # Cargar variables de entorno
@@ -21,7 +21,7 @@ except Exception as e:
     client = None
 
 @mcp.tool()
-def search_threats(keyword: str, limit: int = 5) -> str:
+def search_threats(keyword: str, limit: int = 5) -> Union[List[Dict], str]:
     """
     Busca amenazas, observables o entidades en OpenCTI basándose en una palabra clave.
     Útil para encontrar malware, actores de amenazas o CVEs específicos.
@@ -37,12 +37,12 @@ def search_threats(keyword: str, limit: int = 5) -> str:
         results = client.search_knowledge(keyword, limit)
         if not results:
             return f"No se encontraron resultados para '{keyword}'."
-        return str(results)
+        return results
     except Exception as e:
         return f"Error al buscar en OpenCTI: {str(e)}"
 
 @mcp.tool()
-def list_latest_indicators(limit: int = 10, pattern_type: Optional[str] = None) -> str:
+def list_latest_indicators(limit: int = 10, pattern_type: Optional[str] = None) -> Union[List[Dict], str]:
     """
     Lista los últimos indicadores de compromiso (IOCs) registrados en la plataforma.
     
@@ -55,12 +55,12 @@ def list_latest_indicators(limit: int = 10, pattern_type: Optional[str] = None) 
     
     try:
         indicators = client.get_indicators(limit, filter_type=pattern_type)
-        return str(indicators)
+        return indicators
     except Exception as e:
         return f"Error al obtener indicadores: {str(e)}"
 
 @mcp.tool()
-def get_intelligence_reports(limit: int = 5) -> str:
+def get_intelligence_reports(limit: int = 5) -> Union[List[Dict], str]:
     """
     Obtiene los reportes de inteligencia más recientes publicados en OpenCTI.
     Útil para obtener contexto estratégico o resúmenes de campañas.
@@ -70,12 +70,12 @@ def get_intelligence_reports(limit: int = 5) -> str:
 
     try:
         reports = client.get_reports(limit)
-        return str(reports)
+        return reports
     except Exception as e:
         return f"Error al obtener reportes: {str(e)}"
 
 @mcp.tool()
-def get_entity_by_id(entity_id: str) -> str:
+def get_entity_by_id(entity_id: str) -> Union[Dict, str]:
     """
     Obtiene todos los detalles disponibles de una entidad específica usando su ID de OpenCTI.
     
@@ -89,7 +89,7 @@ def get_entity_by_id(entity_id: str) -> str:
         details = client.get_entity_details(entity_id)
         if not details:
             return "No se encontró ninguna entidad con ese ID."
-        return str(details)
+        return details
     except Exception as e:
         return f"Error al obtener detalles de la entidad: {str(e)}"
 
