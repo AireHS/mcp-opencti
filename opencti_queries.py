@@ -217,9 +217,9 @@ if __name__ == "__main__":
     # buscar_malware("Emotet")
     # buscar_actores_amenaza("APT29")
     # buscar_vulnerabilidades("CVE-2023-1234")
-    # listar_indicadores(5)
+    listar_indicadores(5)
     # buscar_observables("192.168.1.1")
-    # listar_reportes(3)
+    listar_reportes(3)
     # busqueda_global("ransomware")
     
     print("\n✅ Script cargado. Edita el bloque 'if __name__' para ejecutar pruebas.")

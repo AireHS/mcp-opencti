@@ -35,6 +35,15 @@ Este repositorio contiene un servidor de **Model Context Protocol (MCP)** diseñ
      ```
    - Edita `.env` y agrega tu URL de OpenCTI y tu Token.
 
+## 🧪 Verificación
+
+Antes de configurar los clientes, puedes verificar que la conexión con OpenCTI funciona correctamente usando el script de pruebas incluido:
+
+```bash
+python opencti_queries.py
+```
+
+Si ves una lista de indicadores y reportes en la consola, tu entorno está configurado correctamente.
 
 ## 🖥️ Uso con Claude Desktop
 
